@@ -1,12 +1,12 @@
-import { FooterBar, Container, Encerramento } from './styles'
+import styles from './styles'
 import logo from '../../assets/logo.png'
 import instagram from '../../assets/instagram.png'
 import facebook from '../../assets/facebook.png'
 import github from '../../assets/GithubC.png'
 
 const Footer = () => (
-  <FooterBar>
-    <Container>
+  <styles.FooterBar>
+    <styles.Container>
       <img src={logo} alt="Efood" />
       <br />
       <a
@@ -36,13 +36,13 @@ const Footer = () => (
       <a href="https://github.com/Danilloneo" target="_blank" rel="noreferrer">
         <img className="git" src={github} alt="github" title="Github" />
       </a>
-      <Encerramento>
+      <styles.Encerramento>
         A efood é uma plataforma para divulgação de estabelecimentos, a
         responsabilidade pela entrega, qualidade dos produtos é toda do
         estabelecimento contratado.
-      </Encerramento>
-    </Container>
-  </FooterBar>
+      </styles.Encerramento>
+    </styles.Container>
+  </styles.FooterBar>
 )
 
 export default Footer
