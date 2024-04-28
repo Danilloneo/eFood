@@ -5,7 +5,6 @@ const styles = {
   CardMore: styled.div`
     background-color: ${cores.vermelhoFundo};
     width: 320px;
-    margin-bottom: 48px;
     position: relative;
     padding: 8px;
   `,

@@ -50,6 +50,7 @@ import { cores } from '../../styles'
 //   margin: 0 auto;
 //   padding-top: 80px;
 // `
+
 const styles = {
   FooterBar: styled.footer`
     width: 100%;
@@ -64,7 +65,7 @@ const styles = {
     }
   `,
   Container: styled.div`
-    width: 100%;
+    width: 1024px;
     margin: 0 auto;
     text-align: center;
     padding-top: 64px;

@@ -4,7 +4,8 @@ export const cores = {
   alicate: '#ffffff',
   begeClaro: '#fff8f2',
   vermelhoFundo: '#e66767',
-  vermelhoTexto: '#ffebd9'
+  vermelhoTexto: '#ffebd9',
+  branco: '#FFFFFF'
 }
 //card home
 //todo o body

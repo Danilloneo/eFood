@@ -54,20 +54,17 @@ const foodmoreDestaques: FoodMore[] = [
 
 const More = () => (
   <>
-    <styles.VariacaoHeader>
-      <styles.ContainerHeader>
-        <styles.TituloMore>Restaurantes</styles.TituloMore>
-        <styles.VariacaoContainer>
-          <Link to="/">
-            <img src={logo} alt="Efood" />
-          </Link>
-        </styles.VariacaoContainer>
-
-        <styles.Carrinho>
-          <span>0</span> produto(s) no carrinho
-        </styles.Carrinho>
-      </styles.ContainerHeader>
-    </styles.VariacaoHeader>
+    <styles.ContainerHeader>
+      <styles.VariacaoHeader>
+        <styles.containerTitulo>Restaurantes</styles.containerTitulo>
+        <Link to="/">
+          <img src={logo} alt="Efood" />
+        </Link>
+        <div>
+          <styles.Carrinho>0 produto(s) no carrinho</styles.Carrinho>
+        </div>
+      </styles.VariacaoHeader>
+    </styles.ContainerHeader>
     <Banner />
     <ProductsListMore foodmore={foodmoreDestaques} />
     <Footer />

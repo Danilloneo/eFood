@@ -9,6 +9,9 @@ const styles = {
     width: 472px;
     margin-bottom: 48px;
     position: relative;
+    border-left: 1px solid ${cores.vermelhoFundo};
+    border-right: 1px solid ${cores.vermelhoFundo};
+    border-bottom: 1px solid ${cores.vermelhoFundo};
   `,
   Titulo: styled.h3`
     font-weight: bold;
@@ -21,7 +24,7 @@ const styles = {
   Nota: styled.span`
     color: ${cores.vermelhoFundo};
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 900;
     padding-right: 8px;
   `,
   ContainerFlex: styled.div`

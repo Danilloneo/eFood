@@ -11,6 +11,8 @@ const styles = {
     background-repeat: no-repeat;
     position: relative;
     margin-bottom: 80px;
+    display: block;
+    align-items: center;
   `,
 
   Title: styled.h2`
@@ -24,10 +26,15 @@ const styles = {
     margin: 0 auto;
   `,
   Container: styled.div`
-    width: 100%;
+    width: 1024px;
     margin: 0 auto;
-    text-align: center;
     padding-top: 64px;
+    aling-items: center;
+    display: flex;
+
+    img {
+      margin: 0 auto;
+    }
   `
 }
 export default styles

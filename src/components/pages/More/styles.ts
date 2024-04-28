@@ -5,39 +5,49 @@ import { cores } from '../../../styles'
 const styles = {
   ContainerHeader: styled.div`
     width: 100%;
-    padding: 0 240px;
     display: flex;
-    justify-content: space-between;
-    nargin: 0 auto;
+    vertical-align: center;
+    background-image: url(${bg});
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    img {
+      display: flex;
+      width: auto;
+      margin: 0 auto;
+    }
   `,
 
   VariacaoHeader: styled.header`
-  width: 100%;
-  height: 186px;
-  background-image: url(${bg});
-  background-size: cover;
-  background-repeat: no-repeat;
-  position: relative;
-  margin-bottom: 80px;
-  align-items: center;
-  display: flex;,
-`,
-
-  VariacaoContainer: styled.div`
-    width: 38px;
+    width: 1024px;
+    height: 186px;
     margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+
+    img {
+      margin: 0 auto;
+      padding-left: 80px;
+    }
   `,
 
-  TituloMore: styled.h2`
+  containerTitulo: styled.h2`
+    justify-content: start;
+    align-items: center;
+    position: relative;
+    display: flex;
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 900;
     color: ${cores.vermelhoFundo};
   `,
 
   Carrinho: styled.p`
+    margin: 0 auto;
+    position: relative;
+    display: flex;
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 900;
     color: ${cores.vermelhoFundo};
   `
 }
