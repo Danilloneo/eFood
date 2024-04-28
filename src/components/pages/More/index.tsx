@@ -1,11 +1,5 @@
 import { Link } from 'react-router-dom'
-import {
-  VariacaoHeader,
-  VariacaoContainer,
-  ContainerHeader,
-  TituloMore,
-  Carrinho
-} from './styles'
+import styles from './styles'
 import logo from '../../../assets/logo.png'
 import Banner from '../../Banner'
 import ProductsListMore from '../../ProductsList/ProductsListMore'
@@ -60,20 +54,17 @@ const foodmoreDestaques: FoodMore[] = [
 
 const More = () => (
   <>
-    <VariacaoHeader>
-      <ContainerHeader>
-        <TituloMore>Restaurantes</TituloMore>
-        <VariacaoContainer>
-          <Link to="/">
-            <img src={logo} alt="Efood" />
-          </Link>
-        </VariacaoContainer>
-
-        <Carrinho>
-          <span>0</span> produto(s) no carrinho
-        </Carrinho>
-      </ContainerHeader>
-    </VariacaoHeader>
+    <styles.ContainerHeader>
+      <styles.VariacaoHeader>
+        <styles.containerTitulo>Restaurantes</styles.containerTitulo>
+        <Link to="/">
+          <img src={logo} alt="Efood" />
+        </Link>
+        <div>
+          <styles.Carrinho>0 produto(s) no carrinho</styles.Carrinho>
+        </div>
+      </styles.VariacaoHeader>
+    </styles.ContainerHeader>
     <Banner />
     <ProductsListMore foodmore={foodmoreDestaques} />
     <Footer />

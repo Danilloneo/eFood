@@ -1,31 +1,42 @@
 import styled from 'styled-components'
+import banner from '../../assets/banner.png'
 import { cores } from '../../styles'
-import bannerImg from '../../assets/apresentacao.png'
 
-export const ImgBanner = styled.div`
+const styles = {
+  Sombra: styled.div`
+    width: 100%;
+    height: 280px;
+    margin-bottom: 80px;
+    position: relative;
+  `,
+
+  ImgBanner: styled.div`
   width: 100%;
-  height: 400px;
-  display: block;
-  margin-top: -80px;
-  background-image: url(${bannerImg});
-  background-repeat: no-repeat;
-  background-size: cover;
-  margin-bottom: 80px;
+  height: 280px;
+  background:
+    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    url(${banner}) no-repeat;
+    background-size: cover;
+}
 
-  h3 {
+`,
+  CentralizaBanner: styled.div`
+    display: block;
+    width: 1024px;
+    margin: 0 auto;
+    color: ${cores.branco};
+  `,
+
+  EstiloTitulo1Banner: styled.h2`
     font-size: 32px;
     font-weight: 100;
-    color: ${cores.vermelhoTexto};
-    padding-top: 25px;
-    margin-left: 171px;
-  }
-
-  h1 {
+    padding-top: 26px;
+    padding-bottom: 157px;
+  `,
+  EstiloTitulo2Banner: styled.h3`
     font-size: 32px;
     font-weight: 900;
-    color: ${cores.alicate};
-    padding-top: 156px;
-    padding-bottom: 32px;
-    margin-left: 171px;
-  }
-`
+  `
+}
+
+export default styles

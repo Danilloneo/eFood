@@ -1,10 +1,5 @@
 import { Link } from 'react-router-dom'
-import {
-  CardMore,
-  TituloMore,
-  DescricaoMore,
-  ContainerFlexMore
-} from './styles'
+import styles from './styles'
 import Button from '../../Button'
 
 export type Props = {
@@ -18,18 +13,18 @@ const ProductMore = ({
   descriptionMore,
   imageProdutoMore
 }: Props) => (
-  <CardMore>
+  <styles.CardMore>
     <img src={imageProdutoMore} />
-    <ContainerFlexMore>
-      <TituloMore>{titleMore}</TituloMore>
-    </ContainerFlexMore>
-    <DescricaoMore>{descriptionMore}</DescricaoMore>
+    <styles.ContainerFlexMore>
+      <styles.TituloMore>{titleMore}</styles.TituloMore>
+    </styles.ContainerFlexMore>
+    <styles.DescricaoMore>{descriptionMore}</styles.DescricaoMore>
     <Link to="/More">
       <Button size="big" bcolor="vermelhoTexto">
         Adicionar ao carrinho
       </Button>
     </Link>
-  </CardMore>
+  </styles.CardMore>
 )
 
 export default ProductMore

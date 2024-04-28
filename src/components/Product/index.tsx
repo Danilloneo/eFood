@@ -1,14 +1,6 @@
 import { Link } from 'react-router-dom'
 import Tag from '../Tag'
-import {
-  Card,
-  Titulo,
-  Descricao,
-  ContainerFlex,
-  ContainerCard,
-  Nota,
-  Infos
-} from './styles'
+import styles from './styles'
 import Button from '../Button'
 
 export type Props = {
@@ -41,30 +33,30 @@ const Product = ({
   imageNota,
   punctuation
 }: Props) => (
-  <Card>
+  <styles.Card>
     <img src={imageProduto} />
-    <Infos conteudo="ComConteudo">
+    <styles.Infos conteudo="ComConteudo">
       <Tag size={'big'}>{category}</Tag>
       {infosFood.map((infosFood) => (
         <Tag key={infosFood}>{infosFood}</Tag>
       ))}
-    </Infos>
-    <ContainerFlex>
-      <Titulo>{title}</Titulo>
+    </styles.Infos>
+    <styles.ContainerFlex>
+      <styles.Titulo>{title}</styles.Titulo>
       <div>
-        <Nota>{punctuation}</Nota>
+        <styles.Nota>{punctuation}</styles.Nota>
         <img src={imageNota} />
       </div>
-    </ContainerFlex>
-    <ContainerCard>
-      <Descricao>{description}</Descricao>
+    </styles.ContainerFlex>
+    <styles.ContainerCard>
+      <styles.Descricao>{description}</styles.Descricao>
       <Link to="/More">
         <Button size="small" bcolor="vermelhoFundo">
           Saiba mais
         </Button>
       </Link>
-    </ContainerCard>
-  </Card>
+    </styles.ContainerCard>
+  </styles.Card>
 )
 
 export default Product
