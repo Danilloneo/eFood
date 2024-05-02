@@ -1,40 +1,44 @@
 import styled from 'styled-components'
-import bg from '../../assets/fundo.png'
+
 import { cores } from '../../styles'
 
 const styles = {
-  HeaderBar: styled.header`
+  imagemHeader: styled.div`
     width: 100%;
-    height: 384px;
-    background-image: url(${bg});
+    display: flex;
+    height: 386px;
     background-size: cover;
     background-repeat: no-repeat;
-    position: relative;
+    justity-content: center;
     margin-bottom: 80px;
-    display: block;
-    align-items: center;
-  `,
 
-  Title: styled.h2`
-    color: ${cores.vermelhoFundo};
-    width: 540px;
-    font-weight: bold;
-    font-size: 36px;
-    text-align: center;
-    padding-top: 140px;
-    padding-bottom: 40px;
-    margin: 0 auto;
-  `,
-  Container: styled.div`
-    width: 1024px;
-    margin: 0 auto;
-    padding-top: 64px;
-    aling-items: center;
-    display: flex;
+    .container {
+      width: 100%;
+      heigth: 100%;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
 
     img {
+      display: block;
+      width: auto;
       margin: 0 auto;
+      padding-bottom: 138px;
+    }
+
+    h2 {
+      font-size: 36px;
+      font-weight: 900;
+      color: ${cores.vermelhoFundo};
+    }
+
+    div {
+      margin: 0 auto;
+      width: 540px;
     }
   `
 }
+
 export default styles

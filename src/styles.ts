@@ -24,4 +24,11 @@ export const GlobalCSS = createGlobalStyle`
     background-color: ${cores.begeClaro};
 
   }
+
+  .container{
+  max-width: 1024px;
+  width: 100%;
+  margin: 0 auto;
+
+  }
 `

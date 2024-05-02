@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import styles from './styles'
+import bgHeader from '../../../assets/fundo.png'
 import logo from '../../../assets/logo.png'
 import Banner from '../../Banner'
 import ProductsListMore from '../../ProductsList/ProductsListMore'
@@ -52,23 +53,27 @@ const foodmoreDestaques: FoodMore[] = [
   }
 ]
 
-const More = () => (
-  <>
-    <styles.ContainerHeader>
-      <styles.VariacaoHeader>
-        <styles.containerTitulo>Restaurantes</styles.containerTitulo>
-        <Link to="/">
-          <img src={logo} alt="Efood" />
-        </Link>
-        <div>
+const More = () => {
+  return (
+    <>
+      <styles.imagemHeader style={{ backgroundImage: `url(${bgHeader})` }}>
+        <div className="container">
+          <styles.restauranteTitulo>
+            <Link to="/" title="Ir para Restaurantes">
+              Restaurantes{' '}
+            </Link>
+          </styles.restauranteTitulo>
+          <Link to="/" title="Ir para Restaurantes">
+            <img src={logo} alt="Efood" />
+          </Link>
           <styles.Carrinho>0 produto(s) no carrinho</styles.Carrinho>
         </div>
-      </styles.VariacaoHeader>
-    </styles.ContainerHeader>
-    <Banner />
-    <ProductsListMore foodmore={foodmoreDestaques} />
-    <Footer />
-  </>
-)
+      </styles.imagemHeader>
+      <Banner />
+      <ProductsListMore foodmore={foodmoreDestaques} />
+      <Footer />
+    </>
+  )
+}
 
 export default More
