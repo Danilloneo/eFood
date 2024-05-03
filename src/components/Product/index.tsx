@@ -75,7 +75,7 @@ const Product = ({
       </div>
       <styles.ContainerCard>
         <styles.Descricao>{foodDetails}</styles.Descricao>
-        <Link to="/More">
+        <Link to="/More/">
           <Button>Saiba mais</Button>
         </Link>
       </styles.ContainerCard>
