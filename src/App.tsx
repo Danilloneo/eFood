@@ -4,14 +4,10 @@ import Rotas from './routes'
 
 function App() {
   return (
-    <>
-      <div className="App">
-        <BrowserRouter>
-          <GlobalCSS />
-          <Rotas />
-        </BrowserRouter>
-      </div>
-    </>
+    <BrowserRouter>
+      <GlobalCSS />
+      <Rotas />
+    </BrowserRouter>
   )
 }
 

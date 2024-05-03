@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
 // import { TagContainer } from '../Tag/styles'
-import { InfosProps } from '.'
 
 const styles = {
   Card: styled.div`
@@ -12,6 +11,12 @@ const styles = {
     border-left: 1px solid ${cores.vermelhoFundo};
     border-right: 1px solid ${cores.vermelhoFundo};
     border-bottom: 1px solid ${cores.vermelhoFundo};
+    position: relative;
+    img {
+      width: 100%;
+      height: 218px;
+      object-fit: cover;
+    }
   `,
   Titulo: styled.h3`
     font-weight: bold;
@@ -33,6 +38,11 @@ const styles = {
     justify-content: space-between;
     align-items: center;
     padding: 8px 16px 16px 8px;
+
+    img {
+      width: 22px;
+      height: 22px;
+    }
   `,
   Descricao: styled.p`
     font-size: 14px;
@@ -44,13 +54,14 @@ const styles = {
   ContainerCard: styled.div`
     padding: 0 8px 16px 8px;
   `,
-  Infos: styled.div<InfosProps>`
+  Infos: styled.div`
   position: absolute;
   top: 16px;
   right: 16px;
-  display: ${(props) => (props.conteudo === 'ComConteudo' ? 'flex' : 'none')};
+
   }
 `
 }
 
 export default styles
+// display: ${(props) => (props.conteudo === 'ComConteudo' ? 'flex' : 'none')};
