@@ -5,7 +5,7 @@ import More from './components/pages/More'
 const Rotas = () => (
   <Routes>
     <Route path="/" element={<Home />} />
-    <Route path="/more" element={<More />} />
+    <Route path="/food/:id" element={<More />} />
   </Routes>
 )
 

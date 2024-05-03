@@ -1,6 +1,6 @@
 export type Props = {
   size?: 'small' | 'big'
-  children: string
+  children?: string
 }
 import { TagContainer } from './styles'
 
