@@ -3,6 +3,7 @@ import Tag from '../Tag'
 import styles from './styles'
 import Button from '../Button'
 import imageNota from '../../assets/estrela.png'
+import { Food } from '../pages/Home'
 
 type Props = {
   foodTitle: string
@@ -75,7 +76,7 @@ const Product = ({
       </div>
       <styles.ContainerCard>
         <styles.Descricao>{foodDetails}</styles.Descricao>
-        <Link to="/More/">
+        <Link to={foodToLink}>
           <Button>Saiba mais</Button>
         </Link>
       </styles.ContainerCard>

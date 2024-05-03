@@ -4,7 +4,7 @@ import { Props } from '.'
 export const Container = styled.section<Omit<Props, 'food'>>`
   max-width: 1024px;
   position: relative;
-  margin: 0 auto;
+  margin: 80px 0 auto;
 `
 
 export const List = styled.ul`

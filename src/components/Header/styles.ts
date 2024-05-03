@@ -1,44 +1,59 @@
 import styled from 'styled-components'
-
+import fundo from '../../assets/fundo.png'
 import { cores } from '../../styles'
+import { Props } from '.'
 
-const styles = {
-  imagemHeader: styled.div`
-    width: 100%;
+export const HeaderStyle = styled.header`
+  height: 163px;
+  background-image: url(${fundo});
+  align-items: center;
+
+  .container {
+    max-width: 1024px;
     display: flex;
-    height: 386px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    justity-content: center;
-    margin-bottom: 80px;
+    justify-content: space-between;
+    margin: 0 auto;
+  }
+`
 
-    .container {
-      width: 100%;
-      heigth: 100%;
-      display: flex;
-      align-items: center;
-      text-align: center;
-      position: relative;
-    }
+//   a {
+//     display: ${(props) => (props.estado === 'Home' ? 'none' : 'flex')}
+// }
 
-    img {
-      display: block;
-      width: auto;
-      margin: 0 auto;
-      padding-bottom: 138px;
-    }
+// display: ${(props) => (props.estado === 'More' ? 'flex' : 'none')};
+export const Branding = styled.img`
+  width: 125px;
+  height: 57.5px;
+  margin-top: 39px;
+`
+export const LinkRestaurantes = styled.a`
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  color: ${cores.vermelhoFundo};
+  margin-top: 39px;
+`
 
-    h2 {
-      font-size: 36px;
-      font-weight: 900;
-      color: ${cores.vermelhoFundo};
-    }
+export const TextCart = styled.p`
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 39px;
+  color: ${cores.vermelhoFundo};
+`
 
-    div {
-      margin: 0 auto;
-      width: 540px;
-    }
-  `
-}
-
-export default styles
+export const HeaderHome = styled.div`
+  align-items: center;
+  text-align: center;
+  height: 384px;
+  background-image: url(${fundo});
+  display: block;
+  justify-content: center;
+  h2 {
+    width: 540px;
+    padding-top: 138px;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 36px;
+    color: ${cores.vermelhoFundo};
+  }
+`

@@ -107,7 +107,7 @@ const Home = () => {
 
   return (
     <>
-      <Header />
+      <Header itens={0} estado={'Home'} />
       <div className="container">
         <ProductsList food={food} />
       </div>
