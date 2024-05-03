@@ -105,6 +105,9 @@ const Home = () => {
       .then((res) => setFood(res))
   }, [])
 
+  if (!food) {
+    return <h3>Loading...</h3>
+  }
   return (
     <>
       <Header itens={0} estado={'Home'} />

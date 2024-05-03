@@ -1,4 +1,4 @@
-import { Card, Photo, Title, Description, AddCartButton } from './styles'
+import { styles, AddCartButton } from './styles'
 
 export type Props = {
   DishPhoto: string
@@ -19,12 +19,14 @@ const Dish = ({
   DishPhotoAlt
 }: Props) => {
   return (
-    <Card>
-      <Photo src={DishPhoto} alt={DishPhotoAlt} />
-      <Title>{DishTitle}</Title>
-      <Description>{reduceDescription(DishDescription)}</Description>
+    <styles.Card>
+      <styles.Photo src={DishPhoto} alt={DishPhotoAlt} />
+      <styles.Title>{DishTitle}</styles.Title>
+      <styles.Description>
+        {reduceDescription(DishDescription)}
+      </styles.Description>
       <AddCartButton to={''}>Adicionar ao carrinho</AddCartButton>
-    </Card>
+    </styles.Card>
   )
 }
 

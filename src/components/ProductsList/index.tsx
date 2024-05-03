@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Product from '../Product'
 import { Food } from '../pages/Home'
-import { Container, List } from './styles'
+import { styles } from './styles'
 
 export type Props = {
   food: Food[]
@@ -10,8 +10,8 @@ export type Props = {
 const ProductsList = ({ food }: Props) => {
   const [destaque, setDestaque] = useState('Destaque da semana')
   return (
-    <Container>
-      <List>
+    <styles.Container>
+      <styles.List>
         {food.map((food) => (
           <Product
             key={food.id}
@@ -23,8 +23,8 @@ const ProductsList = ({ food }: Props) => {
             foodToLink={`/food/${food.id}`}
           />
         ))}
-      </List>
-    </Container>
+      </styles.List>
+    </styles.Container>
   )
 }
 
