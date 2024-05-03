@@ -1,12 +1,6 @@
 import { Link } from 'react-router-dom'
 import logo from '../../assets/logo.png'
-import {
-  Branding,
-  LinkRestaurantes,
-  TextCart,
-  HeaderStyle,
-  HeaderHome
-} from './styles'
+import { styles } from './styles'
 
 export type Props = {
   itens?: number
@@ -16,31 +10,34 @@ export type Props = {
 const Header = ({ itens = 0, estado = 'Home' }: Props) => {
   if (estado === 'More') {
     return (
-      <HeaderStyle>
+      <styles.HeaderStyle>
         <div className="container">
-          <LinkRestaurantes href="/" title="Ir para a página Restaurante">
+          <styles.LinkRestaurantes
+            href="/"
+            title="Ir para a página Restaurante"
+          >
             Restaurantes
-          </LinkRestaurantes>
+          </styles.LinkRestaurantes>
           <Link to="/">
-            <Branding
+            <styles.Branding
               src={logo}
               alt="Logo do restaurante"
               title="Ir para a página Restaurante"
             />
           </Link>
-          <TextCart> {itens} produto(s) no carrinho</TextCart>
+          <styles.TextCart> {itens} produto(s) no carrinho</styles.TextCart>
         </div>
-      </HeaderStyle>
+      </styles.HeaderStyle>
     )
   }
   return (
-    <HeaderHome>
-      <HeaderStyle>
-        <Branding src={logo} alt="Logo do restaurante" />
+    <styles.HeaderHome>
+      <styles.HeaderStyle>
+        <styles.Branding src={logo} alt="Logo do restaurante" />
 
         <h2>Viva experiências gastronômicas no conforto da sua casa</h2>
-      </HeaderStyle>
-    </HeaderHome>
+      </styles.HeaderStyle>
+    </styles.HeaderHome>
   )
 }
 

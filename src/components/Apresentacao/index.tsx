@@ -1,20 +1,18 @@
-import {
-  ApresentacaoContainer,
-  ApresentacaoCategoria,
-  ApresentacaoPrato
-} from './styles'
+import { styles } from './styles'
 import { Food } from '../pages/Home'
 
 export type Props = {
   food: Food
 }
 const Apresentacao = ({ food }: Props) => (
-  <ApresentacaoContainer style={{ backgroundImage: `url(${food.capa})` }}>
+  <styles.ApresentacaoContainer
+    style={{ backgroundImage: `url(${food.capa})` }}
+  >
     <div className="container">
-      <ApresentacaoCategoria>{food.tipo}</ApresentacaoCategoria>
-      <ApresentacaoPrato>{food.titulo}</ApresentacaoPrato>
+      <styles.ApresentacaoCategoria>{food.tipo}</styles.ApresentacaoCategoria>
+      <styles.ApresentacaoPrato>{food.titulo}</styles.ApresentacaoPrato>
     </div>
-  </ApresentacaoContainer>
+  </styles.ApresentacaoContainer>
 )
 
 export default Apresentacao
