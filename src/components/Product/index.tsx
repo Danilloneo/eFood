@@ -3,7 +3,7 @@ import Tag from '../Tag'
 import styles from './styles'
 import Button from '../Button'
 import imageNota from '../../assets/estrela.png'
-import { Food } from '../pages/Home'
+// import { Food } from '../pages/Home'
 
 type Props = {
   foodTitle: string

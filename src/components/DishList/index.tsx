@@ -1,17 +1,7 @@
 import { useState } from 'react'
 import Dish from '../Dish'
 import { AddCartButton } from '../Dish/styles'
-import {
-  Container,
-  List,
-  Modal,
-  ModalContent,
-  FoodImage,
-  ModalContainer,
-  FoodTitle,
-  FoodDescription,
-  CloseIcon
-} from './styles'
+import { styles } from './styles'
 import close from '../../assets/close.png'
 import { Food } from '../pages/Home'
 
@@ -36,8 +26,8 @@ const DishList = ({ food }: Props) => {
 
   return (
     <>
-      <Container>
-        <List>
+      <styles.Container>
+        <styles.List>
           {food.cardapio.map((food) => (
             <li
               key={food.id}
@@ -60,29 +50,29 @@ const DishList = ({ food }: Props) => {
               />
             </li>
           ))}
-        </List>
-      </Container>
-      <Modal className={showModal ? 'visible' : ''}>
-        <ModalContent>
-          <FoodImage src={foodPhoto} alt={foodPhotoAlt} />
-          <ModalContainer>
-            <FoodTitle>{foodTitle}</FoodTitle>
-            <FoodDescription>
+        </styles.List>
+      </styles.Container>
+      <styles.Modal className={showModal ? 'visible' : ''}>
+        <styles.ModalContent>
+          <styles.FoodImage src={foodPhoto} alt={foodPhotoAlt} />
+          <styles.ModalContainer>
+            <styles.FoodTitle>{foodTitle}</styles.FoodTitle>
+            <styles.FoodDescription>
               {foodDescription}
               <p>Serve: {foodServe}</p>
-            </FoodDescription>
+            </styles.FoodDescription>
             <AddCartButton to={''}>
               Adicionar ao carrinho - {priceFormat(foodPrice)}
             </AddCartButton>
-          </ModalContainer>
-          <CloseIcon
+          </styles.ModalContainer>
+          <styles.CloseIcon
             onClick={() => setShowModal(false)}
             src={close}
             alt="Icone de fechar"
           />
-        </ModalContent>
+        </styles.ModalContent>
         <div onClick={() => setShowModal(false)} className="overlay"></div>
-      </Modal>
+      </styles.Modal>
     </>
   )
 }
