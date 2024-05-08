@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Props } from '.'
 
 export const styles = {
-  Container: styled.section<Omit<Props, 'food'>>`
+  Container: styled.section<Omit<Props, 'foods'>>`
     max-width: 1024px;
     position: relative;
     margin: 80px 0 auto;

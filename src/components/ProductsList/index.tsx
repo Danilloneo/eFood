@@ -4,15 +4,15 @@ import { Food } from '../pages/Home'
 import { styles } from './styles'
 
 export type Props = {
-  food: Food[]
+  foods: Food[]
 }
 
-const ProductsList = ({ food }: Props) => {
-  const [destaque, setDestaque] = useState('Destaque da semana')
+const ProductsList = ({ foods }: Props) => {
+  const [destaque] = useState('Destaque da semana')
   return (
     <styles.Container>
       <styles.List>
-        {food.map((food) => (
+        {foods.map((food) => (
           <Product
             key={food.id}
             foodTitle={food.titulo}

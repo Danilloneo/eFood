@@ -6,10 +6,10 @@ import close from '../../assets/close.png'
 import { Food } from '../pages/Home'
 
 export type Props = {
-  food: Food
+  foods: Food
 }
 
-const DishList = ({ food }: Props) => {
+const DishList = ({ foods }: Props) => {
   const [showModal, setShowModal] = useState(false)
   const [foodTitle, setfoodTitle] = useState('')
   const [foodDescription, setfoodDescription] = useState('')
@@ -28,7 +28,7 @@ const DishList = ({ food }: Props) => {
     <>
       <styles.Container>
         <styles.List>
-          {food.cardapio.map((food) => (
+          {foods.cardapio.map((food) => (
             <li
               key={food.id}
               onClick={() => {
