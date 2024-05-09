@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import logo from '../../assets/logo.png'
 import { styles } from './styles'
+import { open } from '../../Store/reducers/cart'
+import { useDispatch } from 'react-redux'
 
 export type Props = {
   itens?: number
@@ -8,6 +10,11 @@ export type Props = {
 }
 
 const Header = ({ itens = 0, estado = 'Home' }: Props) => {
+  const dispatch = useDispatch()
+  const openCart = () => {
+    dispatch(open())
+  }
+
   if (estado === 'More') {
     return (
       <styles.HeaderStyle>
@@ -25,7 +32,10 @@ const Header = ({ itens = 0, estado = 'Home' }: Props) => {
               title="Ir para a página Restaurante"
             />
           </Link>
-          <styles.TextCart> {itens} produto(s) no carrinho</styles.TextCart>
+          <styles.CartButton onClick={openCart} title="Abrir carrinho">
+            {' '}
+            {itens} produto(s) no carrinho
+          </styles.CartButton>
         </div>
       </styles.HeaderStyle>
     )

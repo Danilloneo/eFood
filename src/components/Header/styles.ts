@@ -29,11 +29,12 @@ export const styles = {
     margin-top: 39px;
   `,
 
-  TextCart: styled.p`
+  CartButton: styled.a`
     font-size: 18px;
     font-weight: bold;
     margin-top: 39px;
     color: ${cores.vermelhoFundo};
+    cursor: pointer;
   `,
 
   HeaderHome: styled.div`

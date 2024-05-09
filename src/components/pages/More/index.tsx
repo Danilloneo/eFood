@@ -5,6 +5,8 @@ import Apresentacao from '../../Apresentacao'
 import DishList from '../../DishList'
 import Footer from '../../Footer'
 import { useGetFoodQuery } from '../../../services/api'
+import Cart from '../../Cart'
+
 // import { Food } from '../Home'
 
 // const { data: food } = useGetFoodQuery(id)
@@ -12,6 +14,7 @@ import { useGetFoodQuery } from '../../../services/api'
 const More = () => {
   const { id } = useParams()
   const { data: dishFood } = useGetFoodQuery(id!)
+
   // console.log(useGetFoodQuery(id!))
 
   // const [dishFood, setDishFood] = useState<Food>()
@@ -31,6 +34,7 @@ const More = () => {
       <Apresentacao food={dishFood} />
       <DishList foods={dishFood} />
       <Footer />
+      <Cart />
     </>
   )
 }

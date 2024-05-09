@@ -12,7 +12,7 @@ export const styles = {
       position: relative;
       max-width: 1024px;
       margin: 0 auto;
-      z-index: 1;
+      z-index: 2;
     }
     &::after {
       position: absolute;
@@ -22,6 +22,7 @@ export const styles = {
       height: 100%;
       background-color: rgba(0, 0, 0, 0.5);
       content: '';
+      z-index: 0;
     }
   `,
   ApresentacaoCategoria: styled.p`
