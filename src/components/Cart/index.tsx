@@ -14,7 +14,7 @@ import {
 } from './styles'
 
 const Cart = () => {
-  const { isOpen } = useSelector((state: RootReducer) => state.cart)
+  const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
 
   const dispatch = useDispatch()
   const closeCart = () => {
@@ -27,14 +27,18 @@ const Cart = () => {
       <div className="container"></div>
       <Sidebar>
         <ul>
-          <CardItem>
-            <img src={pratoCarrinho} />
-            <div>
-              <h3>Nome do Prato</h3>
-              <p>R$: 60,90</p>
-            </div>
-            <button type="button" title="Excluir item" />
-          </CardItem>
+          {items.map(
+            (item = (
+              <CardItem key={item.}>
+                <img src={pratoCarrinho} />
+                <div>
+                  <h3>Nome do Prato</h3>
+                  <p>R$: 60,90</p>
+                </div>
+                <button type="button" title="Excluir item" />
+              </CardItem>
+            ))
+          )}
           <CardItem>
             <img src={pratoCarrinho} />
             <div>
