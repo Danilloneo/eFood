@@ -4,12 +4,26 @@ import { AddCartButton } from '../Dish/styles'
 import { styles } from './styles'
 import close from '../../assets/close.png'
 import { Food } from '../pages/Home'
+import { useDispatch } from 'react-redux'
+import { add, open } from '../../Store/reducers/cart'
 
 export type Props = {
   foods: Food
 }
 
+// key = { food.id }
+// DishPhoto = { food.foto }
+// DishTitle = { food.nome }
+// DishDescription = { food.descricao }
+// DishPhotoAlt = { food.nome }
+
 const DishList = ({ foods }: Props) => {
+  const dispatch = useDispatch()
+  const addToCart = () => {
+    dispatch(add(foods))
+    dispatch(open())
+  }
+
   const [showModal, setShowModal] = useState(false)
   const [foodTitle, setfoodTitle] = useState('')
   const [foodDescription, setfoodDescription] = useState('')
@@ -61,7 +75,7 @@ const DishList = ({ foods }: Props) => {
               {foodDescription}
               <p>Serve: {foodServe}</p>
             </styles.FoodDescription>
-            <AddCartButton to={''}>
+            <AddCartButton to={''} onClick={addToCart}>
               Adicionar ao carrinho - {priceFormat(foodPrice)}
             </AddCartButton>
           </styles.ModalContainer>

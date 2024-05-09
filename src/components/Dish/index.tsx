@@ -1,4 +1,6 @@
 import { styles, AddCartButton } from './styles'
+import { add } from '../../Store/reducers/cart'
+import { useDispatch } from 'react-redux'
 
 export type Props = {
   DishPhoto: string

@@ -43,7 +43,7 @@ const Home = () => {
   }
   return (
     <>
-      <Header itens={0} estado={'Home'} />
+      <Header estado={'Home'} />
       <div className="container">
         <ProductsList foods={food} />
       </div>

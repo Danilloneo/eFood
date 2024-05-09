@@ -30,7 +30,7 @@ const More = () => {
   }
   return (
     <>
-      <Header itens={0} estado={'More'} />
+      <Header estado={'More'} />
       <Apresentacao food={dishFood} />
       <DishList foods={dishFood} />
       <Footer />
