@@ -1,7 +1,7 @@
 import { RootReducer } from '../../Store'
 import Button from '../Button'
-import pratoCarrinho from '../../assets/produtoMore.png'
-import { close } from '../../Store/reducers/cart'
+// import pratoCarrinho from '../../assets/produtoMore.png'
+import { close, remove } from '../../Store/reducers/cart'
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
@@ -20,6 +20,9 @@ const Cart = () => {
   const closeCart = () => {
     dispatch(close())
   }
+  const removeItem = (id: number) => {
+    dispatch(remove(id))
+  }
 
   return (
     <CartContainer className={isOpen ? 'is-open' : ''}>
@@ -29,17 +32,17 @@ const Cart = () => {
         <ul>
           {items.map((item) => (
             <CardItem key={item.id}>
-              <img src={item.capa} />
+              <img src={item.foto} />
               <div>
-                <h3>{item.titulo}</h3>
-                <p>R$: 60,90</p>
+                <h3>{item.nome}</h3>
+                <p>{item.preco}</p>
               </div>
-              <button type="button" title="Excluir item" />
+              <button onClick={() => removeItem(item.id)} type="button" />
             </CardItem>
           ))}
         </ul>
         <TotalDish>
-          Valor total <span>R$ 60,90</span>
+          Valor total <span>R$ 0,00</span>
         </TotalDish>
         <Center>
           <Button
@@ -53,4 +56,5 @@ const Cart = () => {
     </CartContainer>
   )
 }
+
 export default Cart
