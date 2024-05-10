@@ -5,7 +5,7 @@ type CartItem = {
   nome: string
   descricao: string
   porcao: string
-  preco: string
+  preco: number
   foto: string
 }
 

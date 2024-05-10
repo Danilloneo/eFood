@@ -3,6 +3,7 @@ import Button from '../Button'
 // import pratoCarrinho from '../../assets/produtoMore.png'
 import { close, remove } from '../../Store/reducers/cart'
 import { useDispatch, useSelector } from 'react-redux'
+import { priceFormat } from '../../components/DishList'
 
 import {
   Overlay,
@@ -24,6 +25,12 @@ const Cart = () => {
     dispatch(remove(id))
   }
 
+  const getTotalPrice = () => {
+    return items.reduce((acumulador, valorAtual) => {
+      return (acumulador += valorAtual.preco!)
+    }, 0)
+  }
+
   return (
     <CartContainer className={isOpen ? 'is-open' : ''}>
       <Overlay onClick={closeCart} />
@@ -42,7 +49,7 @@ const Cart = () => {
           ))}
         </ul>
         <TotalDish>
-          Valor total <span>R$ 0,00</span>
+          Valor total <span>{priceFormat(getTotalPrice())} </span>
         </TotalDish>
         <Center>
           <Button

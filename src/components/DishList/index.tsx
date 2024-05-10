@@ -11,6 +11,13 @@ export type Props = {
   foods: Food
 }
 
+export const priceFormat = (price: number) => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(price)
+}
+
 const DishList = ({ foods }: Props) => {
   const [showModal, setShowModal] = useState(false)
   const [foodId, setFoodId] = useState<number | null>(null)
@@ -22,13 +29,6 @@ const DishList = ({ foods }: Props) => {
   const [foodPrice, setFoodPrice] = useState(0)
   const dispatch = useDispatch()
 
-  const priceFormat = (price: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(price)
-  }
-
   const handleAddToCart = () => {
     if (foodId !== null) {
       dispatch(
@@ -37,7 +37,7 @@ const DishList = ({ foods }: Props) => {
           nome: foodTitle,
           descricao: foodDescription,
           porcao: foodServe,
-          preco: priceFormat(foodPrice),
+          preco: foodPrice,
           foto: foodPhoto
         })
       )
