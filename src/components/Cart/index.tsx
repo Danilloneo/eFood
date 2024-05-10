@@ -42,7 +42,7 @@ const Cart = () => {
               <img src={item.foto} />
               <div>
                 <h3>{item.nome}</h3>
-                <p>{item.preco}</p>
+                <p>{priceFormat(item.preco)}</p>
               </div>
               <button onClick={() => removeItem(item.id)} type="button" />
             </CardItem>
