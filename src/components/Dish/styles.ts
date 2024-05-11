@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { cores } from '../../styles'
+import { cores, BreakPoint } from '../../styles'
 
 export const styles = {
   Card: styled.div`
@@ -17,6 +17,14 @@ export const styles = {
     max-height: 167px;
     width: 100%;
     object-fit: cover;
+    @media (max-width: ${BreakPoint.desktop}) {
+      object-fit: cover;
+      max-width: 244px;
+
+      max-height: 167px;
+      width: 100%;
+      height: 100px;
+    }
   `,
 
   Title: styled.h3`

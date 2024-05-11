@@ -10,21 +10,23 @@ export type Props = {
 const ProductsList = ({ foods }: Props) => {
   const [destaque] = useState('Destaque da semana')
   return (
-    <styles.Container>
-      <styles.List>
-        {foods.map((food) => (
-          <Product
-            key={food.id}
-            foodTitle={food.titulo}
-            foodRate={food.avaliacao}
-            foodDetails={food.descricao}
-            foodPhoto={food.capa}
-            foodCategories={[food.tipo, food.destacado ? destaque : '']}
-            foodToLink={`/food/${food.id}`}
-          />
-        ))}
-      </styles.List>
-    </styles.Container>
+    <div className="container">
+      <styles.Container>
+        <styles.List>
+          {foods.map((food) => (
+            <Product
+              key={food.id}
+              foodTitle={food.titulo}
+              foodRate={food.avaliacao}
+              foodDetails={food.descricao}
+              foodPhoto={food.capa}
+              foodCategories={[food.tipo, food.destacado ? destaque : '']}
+              foodToLink={`/food/${food.id}`}
+            />
+          ))}
+        </styles.List>
+      </styles.Container>
+    </div>
   )
 }
 
