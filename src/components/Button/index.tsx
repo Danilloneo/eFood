@@ -1,4 +1,3 @@
-import { title } from 'process'
 import { ButtonContainer } from './styles'
 
 export type Props = {

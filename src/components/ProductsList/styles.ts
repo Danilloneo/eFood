@@ -11,6 +11,11 @@ export const styles = {
     @media (max-width: ${BreakPoint.desktop}) {
       max-width: 40%;
     }
+
+    @media (max-width: ${BreakPoint.tablet}) {
+      align-items: center;
+      margin: 80px auto;
+    }
   `,
 
   List: styled.ul`
@@ -21,6 +26,11 @@ export const styles = {
       max-width: 80%;
       column-gap: 20px;
       margin: 0 auto;
+    }
+
+    @media (max-width: ${BreakPoint.tablet}) {
+      margin: 0 auto;
+      grid-template-columns: 1fr;
     }
     }
   `

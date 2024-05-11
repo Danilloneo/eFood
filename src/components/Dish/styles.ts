@@ -25,6 +25,13 @@ export const styles = {
       width: 100%;
       height: 100px;
     }
+
+    @media (max-width: ${BreakPoint.tablet}) {
+      max-width: 94%;
+      width: 100%;
+      height: 100%;
+      max-height: 180px;
+    }
   `,
 
   Title: styled.h3`
