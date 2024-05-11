@@ -2,16 +2,20 @@ import styled from 'styled-components'
 import { cores } from '../../styles'
 // import { TagContainer } from '../Tag/styles'
 
+import { BreakPoint } from '../../styles'
+
 const styles = {
   Card: styled.div`
     background-color: ${cores.alicate};
     width: 472px;
+    mnax-width: 100%;
     margin-bottom: 48px;
     position: relative;
     border-left: 1px solid ${cores.vermelhoFundo};
     border-right: 1px solid ${cores.vermelhoFundo};
     border-bottom: 1px solid ${cores.vermelhoFundo};
     position: relative;
+
     img {
       width: 100%;
       height: 218px;
@@ -38,6 +42,10 @@ const styles = {
     justify-content: space-between;
     align-items: center;
     padding: 8px 16px 16px 8px;
+
+    @media (max-width: ${BreakPoint.desktop}) {
+      max-width: 80%;
+    }
 
     img {
       width: 22px;

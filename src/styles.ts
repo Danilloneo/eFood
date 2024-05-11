@@ -11,6 +11,11 @@ export const cores = {
 //todo o body
 //vermelhoClaro todo texto inclusive h2
 
+export const BreakPoint = {
+  desktop: '1024px',
+  tablet: '768px'
+}
+
 export const GlobalCSS = createGlobalStyle`
   * {
     margin: 0;
@@ -30,6 +35,13 @@ export const GlobalCSS = createGlobalStyle`
   width: 100%;
   margin: 0 auto;
 
+  @media (max-width: ${BreakPoint.desktop}){
+    max-width: 80%;
+    width: 100%;
+    display: inline-block;
+    align-items: center;
+    margin: 0 auto;
+  }
   }
 
 

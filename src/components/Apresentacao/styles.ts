@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { cores } from '../../styles'
+import { cores, BreakPoint } from '../../styles'
 
 export const styles = {
   ApresentacaoContainer: styled.div`
@@ -12,7 +12,13 @@ export const styles = {
       position: relative;
       max-width: 1024px;
       margin: 0 auto;
-      z-index: 1;
+      z-index: 2;
+
+      @media (max-width: ${BreakPoint.desktop}) {
+        display: block;
+        margin: 0 auto;
+        max-width: 80%;
+      }
     }
     &::after {
       position: absolute;
@@ -22,6 +28,7 @@ export const styles = {
       height: 100%;
       background-color: rgba(0, 0, 0, 0.5);
       content: '';
+      z-index: 0;
     }
   `,
   ApresentacaoCategoria: styled.p`

@@ -4,27 +4,29 @@ import { Food } from '../pages/Home'
 import { styles } from './styles'
 
 export type Props = {
-  food: Food[]
+  foods: Food[]
 }
 
-const ProductsList = ({ food }: Props) => {
-  const [destaque, setDestaque] = useState('Destaque da semana')
+const ProductsList = ({ foods }: Props) => {
+  const [destaque] = useState('Destaque da semana')
   return (
-    <styles.Container>
-      <styles.List>
-        {food.map((food) => (
-          <Product
-            key={food.id}
-            foodTitle={food.titulo}
-            foodRate={food.avaliacao}
-            foodDetails={food.descricao}
-            foodPhoto={food.capa}
-            foodCategories={[food.tipo, food.destacado ? destaque : '']}
-            foodToLink={`/food/${food.id}`}
-          />
-        ))}
-      </styles.List>
-    </styles.Container>
+    <div className="container">
+      <styles.Container>
+        <styles.List>
+          {foods.map((food) => (
+            <Product
+              key={food.id}
+              foodTitle={food.titulo}
+              foodRate={food.avaliacao}
+              foodDetails={food.descricao}
+              foodPhoto={food.capa}
+              foodCategories={[food.tipo, food.destacado ? destaque : '']}
+              foodToLink={`/food/${food.id}`}
+            />
+          ))}
+        </styles.List>
+      </styles.Container>
+    </div>
   )
 }
 

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import bg from '../../assets/fundo.png'
-import { cores } from '../../styles'
+import { BreakPoint, cores } from '../../styles'
 
 // export const FooterBar = styled.div`
 //   width: 100%;
@@ -69,6 +69,10 @@ const styles = {
     margin: 0 auto;
     text-align: center;
     padding-top: 64px;
+
+    @media (max-width: ${BreakPoint.tablet}) {
+      max-width: 40%;
+    }
     .git {
       width: 24px;
       margin-left: 8px;
@@ -97,6 +101,9 @@ const styles = {
     font-size: 10px;
     margin: 0 auto;
     padding-top: 80px;
+    @media (max-width: ${BreakPoint.tablet}) {
+      max-width: 100%;
+    }
   `
 }
 

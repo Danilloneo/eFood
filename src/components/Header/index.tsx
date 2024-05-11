@@ -1,13 +1,21 @@
 import { Link } from 'react-router-dom'
 import logo from '../../assets/logo.png'
 import { styles } from './styles'
+import { open } from '../../Store/reducers/cart'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootReducer } from '../../Store'
 
 export type Props = {
-  itens?: number
   estado?: 'Home' | 'More'
 }
 
-const Header = ({ itens = 0, estado = 'Home' }: Props) => {
+const Header = ({ estado = 'Home' }: Props) => {
+  const dispatch = useDispatch()
+  const openCart = () => {
+    dispatch(open())
+  }
+  const { items } = useSelector((state: RootReducer) => state.cart)
+
   if (estado === 'More') {
     return (
       <styles.HeaderStyle>
@@ -25,7 +33,10 @@ const Header = ({ itens = 0, estado = 'Home' }: Props) => {
               title="Ir para a página Restaurante"
             />
           </Link>
-          <styles.TextCart> {itens} produto(s) no carrinho</styles.TextCart>
+          <styles.CartButton onClick={openCart} title="Abrir carrinho">
+            {' '}
+            {items.length} produto(s) no carrinho
+          </styles.CartButton>
         </div>
       </styles.HeaderStyle>
     )

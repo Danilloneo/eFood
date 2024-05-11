@@ -3,46 +3,70 @@ import Dish from '../Dish'
 import { AddCartButton } from '../Dish/styles'
 import { styles } from './styles'
 import close from '../../assets/close.png'
-import { Food } from '../pages/Home'
+import { useDispatch } from 'react-redux'
+import { add, open } from '../../Store/reducers/cart'
 
-export type Props = {
-  food: Food
+export type Food = {
+  id: number
+  nome: string
+  descricao: string
+  foto: string
+  porcao: string
+  preco: number
 }
 
-const DishList = ({ food }: Props) => {
-  const [showModal, setShowModal] = useState(false)
-  const [foodTitle, setfoodTitle] = useState('')
-  const [foodDescription, setfoodDescription] = useState('')
-  const [foodPhoto, setfoodPhoto] = useState('')
-  const [foodPhotoAlt, setfoodPhotoAlt] = useState('')
-  const [foodServe, setfoodServe] = useState('')
-  const [foodPrice, setfoodPrice] = useState(0)
-  const priceFormat = (price: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(price)
+export type Props = {
+  foods: { cardapio: Food[] }
+}
+
+export const priceFormat = (price: number): string => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(price)
+}
+
+const DishList = ({ foods }: Props) => {
+  const [modalState, setModalState] = useState<{
+    showModal: boolean
+    selectedFood?: Food
+  }>({
+    showModal: false
+  })
+
+  const dispatch = useDispatch()
+
+  const handleAddToCart = () => {
+    if (modalState.selectedFood) {
+      dispatch(
+        add({
+          id: modalState.selectedFood.id,
+          nome: modalState.selectedFood.nome,
+          descricao: modalState.selectedFood.descricao,
+          porcao: modalState.selectedFood.porcao,
+          preco: modalState.selectedFood.preco,
+          foto: modalState.selectedFood.foto
+        })
+      )
+      dispatch(open())
+      setModalState((prev) => ({ ...prev, showModal: false }))
+    }
+  }
+
+  const handleDishClick = (food: Food) => {
+    setModalState({
+      showModal: true,
+      selectedFood: food
+    })
   }
 
   return (
     <>
       <styles.Container>
         <styles.List>
-          {food.cardapio.map((food) => (
-            <li
-              key={food.id}
-              onClick={() => {
-                setShowModal(true)
-                setfoodTitle(food.nome)
-                setfoodDescription(food.descricao)
-                setfoodServe(food.porcao)
-                setfoodPrice(food.preco)
-                setfoodPhotoAlt(food.nome)
-                setfoodPhoto(food.foto)
-              }}
-            >
+          {foods.cardapio.map((food) => (
+            <li key={food.id} onClick={() => handleDishClick(food)}>
               <Dish
-                key={food.id}
                 DishPhoto={food.foto}
                 DishTitle={food.nome}
                 DishDescription={food.descricao}
@@ -52,27 +76,42 @@ const DishList = ({ food }: Props) => {
           ))}
         </styles.List>
       </styles.Container>
-      <styles.Modal className={showModal ? 'visible' : ''}>
-        <styles.ModalContent>
-          <styles.FoodImage src={foodPhoto} alt={foodPhotoAlt} />
-          <styles.ModalContainer>
-            <styles.FoodTitle>{foodTitle}</styles.FoodTitle>
-            <styles.FoodDescription>
-              {foodDescription}
-              <p>Serve: {foodServe}</p>
-            </styles.FoodDescription>
-            <AddCartButton to={''}>
-              Adicionar ao carrinho - {priceFormat(foodPrice)}
-            </AddCartButton>
-          </styles.ModalContainer>
-          <styles.CloseIcon
-            onClick={() => setShowModal(false)}
-            src={close}
-            alt="Icone de fechar"
-          />
-        </styles.ModalContent>
-        <div onClick={() => setShowModal(false)} className="overlay"></div>
-      </styles.Modal>
+      {modalState.showModal && modalState.selectedFood && (
+        <styles.Modal className="visible">
+          <styles.ModalContent>
+            <styles.FoodImage
+              src={modalState.selectedFood.foto}
+              alt={modalState.selectedFood.nome}
+            />
+            <styles.ModalContainer>
+              <styles.FoodTitle>
+                {modalState.selectedFood.nome}
+              </styles.FoodTitle>
+              <styles.FoodDescription>
+                {modalState.selectedFood.descricao}
+                <p>Serve: {modalState.selectedFood.porcao}</p>
+              </styles.FoodDescription>
+              <AddCartButton to={''} onClick={handleAddToCart}>
+                Adicionar ao carrinho -{' '}
+                {priceFormat(modalState.selectedFood.preco)}
+              </AddCartButton>
+            </styles.ModalContainer>
+            <styles.CloseIcon
+              onClick={() =>
+                setModalState((prev) => ({ ...prev, showModal: false }))
+              }
+              src={close}
+              alt="Ícone de fechar"
+            />
+          </styles.ModalContent>
+          <div
+            onClick={() =>
+              setModalState((prev) => ({ ...prev, showModal: false }))
+            }
+            className="overlay"
+          ></div>
+        </styles.Modal>
+      )}
     </>
   )
 }
