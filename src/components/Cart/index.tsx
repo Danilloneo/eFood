@@ -27,6 +27,7 @@ const Cart = () => {
 
   const getTotalPrice = () => {
     return items.reduce((acumulador, valorAtual) => {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       return (acumulador += valorAtual.preco!)
     }, 0)
   }
