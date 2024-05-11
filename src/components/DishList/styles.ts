@@ -1,11 +1,16 @@
 import styled from 'styled-components'
 import { AddCartButton } from '../Dish/styles'
-import { cores } from '../../styles'
+import { BreakPoint, cores } from '../../styles'
 
 export const styles = {
   Container: styled.div`
     max-width: 1024px;
     margin: 80px auto;
+
+    @media (max-width: ${BreakPoint.desktop}) {
+      max-width: 80%;
+    }
+
     li {
       list-style: none;
     }
@@ -15,6 +20,14 @@ export const styles = {
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 32px;
     row-gap: 32px;
+
+    @media (max-width: ${BreakPoint.desktop}) {
+      column-gap: 22px;
+    }
+
+    @media (max-width: ${BreakPoint.tablet}) {
+      grid-template-columns: 1fr 1fr;
+    }
   `,
   Modal: styled.div`
     position: fixed;
@@ -48,6 +61,15 @@ export const styles = {
     flex-direction: row;
     position: relative;
     z-index: 3;
+    @media (max-width: ${BreakPoint.desktop}) {
+      max-width: 80%;
+    }
+
+    @media (max-width: ${BreakPoint.tablet}) {
+      width: 100%;
+      nax-width: 100%;
+      height: 80%;
+    }
 
     ${AddCartButton} {
       margin: 0;

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import fundo from '../../assets/fundo.png'
-import { cores } from '../../styles'
+import { cores, BreakPoint } from '../../styles'
 // import { Props } from '.'
 
 export const styles = {
@@ -14,6 +14,9 @@ export const styles = {
       display: flex;
       justify-content: space-between;
       margin: 0 auto;
+      @media (max-width: ${BreakPoint.desktop}) {
+        max-width: 80%;
+      }
     }
   `,
   Branding: styled.img`
@@ -29,11 +32,12 @@ export const styles = {
     margin-top: 39px;
   `,
 
-  TextCart: styled.p`
+  CartButton: styled.a`
     font-size: 18px;
     font-weight: bold;
     margin-top: 39px;
     color: ${cores.vermelhoFundo};
+    cursor: pointer;
   `,
 
   HeaderHome: styled.div`
