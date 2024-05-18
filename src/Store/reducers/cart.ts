@@ -7,6 +7,7 @@ type CartItem = {
   porcao: string
   preco: number
   foto: string
+  quantidade: number // Adicionando a propriedade quantidade
 }
 
 type CartState = {
@@ -23,9 +24,15 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    add: (state, action: PayloadAction<CartItem>) => {
+    add: (state, action: PayloadAction<Omit<CartItem, 'quantidade'>>) => {
       const item = action.payload
-      state.items.push(item)
+      const existingItem = state.items.find((i) => i.id === item.id)
+
+      if (existingItem) {
+        existingItem.quantidade += 1
+      } else {
+        state.items.push({ ...item, quantidade: 1 })
+      }
     },
     open: (state) => {
       state.isOpen = true
@@ -37,7 +44,14 @@ const cartSlice = createSlice({
       state.items = []
     },
     remove: (state, action: PayloadAction<number>) => {
-      state.items = state.items.filter((item) => item.id !== action.payload)
+      const itemId = action.payload
+      const existingItem = state.items.find((i) => i.id === itemId)
+
+      if (existingItem && existingItem.quantidade > 1) {
+        existingItem.quantidade -= 1
+      } else {
+        state.items = state.items.filter((item) => item.id !== itemId)
+      }
     }
   }
 })

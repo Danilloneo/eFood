@@ -96,3 +96,68 @@ export const Center = styled.div`
     width: 100%;
   }
 `
+export const DeliveryForm = styled.div`
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      margin-bottom: 10px;
+    }
+
+    input {
+      margin-bottom: 10px;
+      padding: 8px;
+      font-size: 16px;
+      width: 100%;
+    }
+  }
+`
+
+export const FormRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+`
+
+export const FormColumn = styled.div`
+  flex: 1;
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+`
+
+export const FormButtonGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+`
+
+export const PaymentForm = styled.div`
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      margin-bottom: 10px;
+    }
+
+    input {
+      margin-bottom: 10px;
+      padding: 8px;
+      font-size: 16px;
+      width: 100%;
+    }
+  }
+`
