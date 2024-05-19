@@ -5,15 +5,25 @@ export type Props = {
   bcolor?: 'vermelhoFundo' | 'vermelhoTexto'
   title?: string
   children: string
+  onClick?: () => void
+  style?: React.CSSProperties // Adicionei a propriedade style
 }
 
 const Button = ({
   size = 'small',
   bcolor = 'vermelhoFundo',
   title = '',
-  children
+  children,
+  onClick,
+  style // Adicionei a propriedade style
 }: Props) => (
-  <ButtonContainer size={size} bcolor={bcolor} title={title}>
+  <ButtonContainer
+    size={size}
+    bcolor={bcolor}
+    title={title}
+    onClick={onClick}
+    style={style}
+  >
     {children}
   </ButtonContainer>
 )
