@@ -11,9 +11,13 @@ import Cart from '../../Cart'
 
 // const { data: food } = useGetFoodQuery(id)
 
+type FoodParams = {
+  id: string
+}
+
 const More = () => {
-  const { id } = useParams()
-  const { data: dishFood } = useGetFoodQuery(id!)
+  const { id } = useParams() as FoodParams
+  const { data: dishFood } = useGetFoodQuery(id)
 
   // console.log(useGetFoodQuery(id!))
 
