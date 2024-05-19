@@ -12,7 +12,7 @@ export const cores = {
 //vermelhoClaro todo texto inclusive h2
 
 export const BreakPoint = {
-  desktop: '1024px',
+  desktop: '1357px',
   tablet: '768px'
 }
 

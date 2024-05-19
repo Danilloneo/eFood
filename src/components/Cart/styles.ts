@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { BreakPoint, cores } from '../../styles'
 import fechar from '../../assets/fechar.png'
 
 export const Overlay = styled.div`
@@ -131,8 +131,16 @@ export const DeliveryForm = styled.div`
       height: 32px;
       border: none;
     }
+
     .idF {
       margin-bottom: 28px;
+    }
+
+    @media (max-width: ${BreakPoint.desktop}) {
+      display: block;
+      input {
+        width: 100%;
+      }
     }
   }
 `
@@ -141,10 +149,17 @@ export const FormRow = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+
+  @media (max-width: ${BreakPoint.desktop}) {
+    display: block;
+  }
 `
 
 export const FormColumn = styled.div`
   width: 156px;
+  @media (max-width: ${BreakPoint.desktop}) {
+    width: 100%;
+  }
   &:first-child {
     margin-right: auto;
   }
