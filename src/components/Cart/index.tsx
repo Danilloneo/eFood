@@ -1,23 +1,11 @@
 import { useState } from 'react'
 import { RootReducer } from '../../Store'
 import Button from '../Button'
-import { close, remove } from '../../Store/reducers/cart'
+import { close, remove, clear } from '../../Store/reducers/cart'
 import { useDispatch, useSelector } from 'react-redux'
 import { priceFormat } from '../../components/DishList'
 
-import {
-  Overlay,
-  CartContainer,
-  Sidebar,
-  TotalDish,
-  CardItem,
-  Center,
-  DeliveryForm, // Adicionei o estilo para o formulário de entrega
-  FormRow,
-  FormColumn,
-  FormButtonGroup,
-  PaymentForm // Adicionei o estilo para o formulário de pagamento
-} from './styles'
+import * as S from './styles'
 
 type CartItem = {
   id: number
@@ -33,6 +21,8 @@ const Cart = () => {
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
   const [showCheckout, setShowCheckout] = useState(false)
   const [showPayment, setShowPayment] = useState(false)
+  const [showConfirmation, setShowConfirmation] = useState(false)
+  const [orderId, setOrderId] = useState('')
   const [emptyCartMessage, setEmptyCartMessage] = useState('')
   const [formData, setFormData] = useState({
     nome: '',
@@ -106,13 +96,34 @@ const Cart = () => {
     e.preventDefault()
 
     const checkoutData = {
-      ...formData,
-      items: items.map((item: CartItem) => ({
+      products: items.map((item: CartItem) => ({
         id: item.id,
-        quantidade: item.quantidade,
-        preco: item.preco
-      }))
+        price: item.preco
+      })),
+      delivery: {
+        receiver: formData.nome,
+        address: {
+          description: formData.endereco,
+          city: formData.cidade,
+          zipCode: formData.cep,
+          number: parseInt(formData.numero, 10),
+          complement: formData.complemento
+        }
+      },
+      payment: {
+        card: {
+          name: paymentData.nomeCartao,
+          number: paymentData.numeroCartao,
+          code: parseInt(paymentData.cvv, 10),
+          expires: {
+            month: parseInt(paymentData.mesVencimento, 10),
+            year: parseInt(paymentData.anoVencimento, 10)
+          }
+        }
+      }
     }
+
+    console.log('Dados enviados para o checkout:', checkoutData)
 
     try {
       const response = await fetch(
@@ -127,11 +138,17 @@ const Cart = () => {
       )
 
       if (!response.ok) {
-        throw new Error('Erro ao processar o pagamento')
+        const errorText = await response.text()
+        console.error('Erro na resposta da API:', errorText)
+        throw new Error('Erro ao processar o pagamento: ' + errorText)
       }
 
       const result = await response.json()
-      setResponseMessage('Pagamento realizado com sucesso!')
+      console.log('Resposta da API:', result)
+
+      setOrderId(result.orderId || '12345')
+      setShowConfirmation(true)
+      setResponseMessage('')
     } catch (error) {
       if (error instanceof Error) {
         setResponseMessage(error.message)
@@ -141,20 +158,31 @@ const Cart = () => {
     }
   }
 
+  const handleConclude = () => {
+    dispatch(clear())
+    dispatch(close())
+    setShowCheckout(false)
+    setShowPayment(false)
+    setShowConfirmation(false)
+  }
+
   return (
-    <CartContainer className={isOpen ? 'is-open' : ''}>
-      <Overlay onClick={closeCart} />
+    <S.CartContainer className={isOpen ? 'is-open' : ''}>
+      <S.Overlay onClick={closeCart} />
       <div className="container"></div>
-      <Sidebar>
+      <S.Sidebar>
         {!showCheckout ? (
           <>
             {items.length === 0 ? (
-              <p>O carrinho está vazio, por gentileza adicione um item!</p>
+              <p className="EmptyCar">
+                O carrinho está vazio,
+                <br /> por gentileza adicione um item!
+              </p>
             ) : (
               <>
                 <ul>
                   {items.map((item: CartItem) => (
-                    <CardItem key={item.id}>
+                    <S.CardItem key={item.id}>
                       <img src={item.foto} alt={item.nome} />
                       <div>
                         <h3>{item.nome}</h3>
@@ -165,13 +193,13 @@ const Cart = () => {
                         onClick={() => removeItem(item.id)}
                         type="button"
                       />
-                    </CardItem>
+                    </S.CardItem>
                   ))}
                 </ul>
-                <TotalDish>
+                <S.TotalDish>
                   Valor total <span>{priceFormat(getTotalPrice())}</span>
-                </TotalDish>
-                <Center>
+                </S.TotalDish>
+                <S.Center>
                   <Button
                     title="Clique aqui para continuar com a compra"
                     bcolor="vermelhoTexto"
@@ -179,17 +207,17 @@ const Cart = () => {
                   >
                     Continuar com a Compra
                   </Button>
-                </Center>
+                </S.Center>
               </>
             )}
             {emptyCartMessage && <p>{emptyCartMessage}</p>}
           </>
         ) : !showPayment ? (
-          <DeliveryForm>
+          <S.DeliveryForm>
             <h2>Entrega</h2>
             <form onSubmit={handleAddressSubmit}>
               <label>
-                Quem irá receber:
+                * Quem irá receber:
                 <input
                   type="text"
                   name="nome"
@@ -200,7 +228,7 @@ const Cart = () => {
                 />
               </label>
               <label>
-                Endereço:
+                * Endereço:
                 <input
                   type="text"
                   name="endereco"
@@ -211,7 +239,7 @@ const Cart = () => {
                 />
               </label>
               <label>
-                Cidade:
+                * Cidade:
                 <input
                   type="text"
                   name="cidade"
@@ -221,10 +249,10 @@ const Cart = () => {
                   style={{ width: '100%' }}
                 />
               </label>
-              <FormRow>
-                <FormColumn>
+              <S.FormRow>
+                <S.FormColumn>
                   <label>
-                    CEP:
+                    * CEP:
                     <input
                       type="text"
                       name="cep"
@@ -233,11 +261,12 @@ const Cart = () => {
                       required
                     />
                   </label>
-                </FormColumn>
-                <FormColumn>
+                </S.FormColumn>
+                <S.FormColumn>
                   <label>
-                    Número:
+                    * Número:
                     <input
+                      className="nHome"
                       type="text"
                       name="numero"
                       value={formData.numero}
@@ -245,11 +274,12 @@ const Cart = () => {
                       required
                     />
                   </label>
-                </FormColumn>
-              </FormRow>
+                </S.FormColumn>
+              </S.FormRow>
               <label>
                 Complemento (Opcional):
                 <input
+                  className="idF"
                   type="text"
                   name="complemento"
                   value={formData.complemento}
@@ -257,7 +287,14 @@ const Cart = () => {
                   style={{ width: '100%' }}
                 />
               </label>
-              <FormButtonGroup>
+              <S.FormButtonGroup>
+                <Button
+                  title="Continuar com o Pagamento"
+                  bcolor="vermelhoTexto"
+                  style={{ width: '100%' }}
+                >
+                  Continuar com o Pagamento
+                </Button>
                 <Button
                   title="Voltar para o Carrinho"
                   bcolor="vermelhoTexto"
@@ -266,22 +303,15 @@ const Cart = () => {
                 >
                   Voltar para o Carrinho
                 </Button>
-                <Button
-                  title="Continuar com o Pagamento"
-                  bcolor="vermelhoTexto"
-                  style={{ width: '100%' }}
-                >
-                  Continuar com o Pagamento
-                </Button>
-              </FormButtonGroup>
+              </S.FormButtonGroup>
             </form>
-          </DeliveryForm>
-        ) : (
-          <PaymentForm>
-            <h3>Pagamento - Valor a Pagar {priceFormat(getTotalPrice())}</h3>
+          </S.DeliveryForm>
+        ) : !showConfirmation ? (
+          <S.PaymentForm>
+            <h2>Pagamento - Valor a Pagar {priceFormat(getTotalPrice())}</h2>
             <form onSubmit={handlePayment}>
               <label>
-                Nome no Cartão:
+                * Nome no Cartão:
                 <input
                   type="text"
                   name="nomeCartao"
@@ -291,10 +321,10 @@ const Cart = () => {
                   style={{ width: '100%' }}
                 />
               </label>
-              <FormRow>
-                <FormColumn>
+              <S.FormRow>
+                <S.FormColumn>
                   <label>
-                    Número do Cartão:
+                    * Número do Cartão:
                     <input
                       type="text"
                       name="numeroCartao"
@@ -303,10 +333,10 @@ const Cart = () => {
                       required
                     />
                   </label>
-                </FormColumn>
-                <FormColumn>
+                </S.FormColumn>
+                <S.FormColumn>
                   <label>
-                    CVV:
+                    * CVV:
                     <input
                       type="text"
                       name="cvv"
@@ -315,12 +345,12 @@ const Cart = () => {
                       required
                     />
                   </label>
-                </FormColumn>
-              </FormRow>
-              <FormRow>
-                <FormColumn>
+                </S.FormColumn>
+              </S.FormRow>
+              <S.FormRow>
+                <S.FormColumn>
                   <label>
-                    Mês de Vencimento:
+                    * Mês de Vencimento:
                     <input
                       type="text"
                       name="mesVencimento"
@@ -329,10 +359,10 @@ const Cart = () => {
                       required
                     />
                   </label>
-                </FormColumn>
-                <FormColumn>
+                </S.FormColumn>
+                <S.FormColumn>
                   <label>
-                    Ano de Vencimento:
+                    * Ano de Vencimento:
                     <input
                       type="text"
                       name="anoVencimento"
@@ -341,9 +371,9 @@ const Cart = () => {
                       required
                     />
                   </label>
-                </FormColumn>
-              </FormRow>
-              <FormButtonGroup>
+                </S.FormColumn>
+              </S.FormRow>
+              <S.FormButtonGroup>
                 <Button
                   title="Finalizar Pagamento"
                   bcolor="vermelhoTexto"
@@ -359,13 +389,42 @@ const Cart = () => {
                 >
                   Voltar para a Edição do Endereço
                 </Button>
-              </FormButtonGroup>
+              </S.FormButtonGroup>
             </form>
             {responseMessage && <p>{responseMessage}</p>}
-          </PaymentForm>
+          </S.PaymentForm>
+        ) : (
+          <S.ConfirmationMessage>
+            <h2>Pedido realizado - {orderId}</h2>
+            <p>
+              Estamos felizes em informar que seu pedido já está em processo de
+              preparação e, em breve, será entregue no endereço fornecido.
+            </p>
+            <p>
+              Gostaríamos de ressaltar que nossos entregadores não estão
+              autorizados a realizar cobranças extras.
+            </p>
+            <p>
+              Lembre-se da importância de higienizar as mãos após o recebimento
+              do pedido, garantindo assim sua segurança e bem-estar durante a
+              refeição.
+            </p>
+            <p>
+              Esperamos que desfrute de uma deliciosa e agradável experiência
+              gastronômica. Bom apetite!
+            </p>
+            <Button
+              title="Concluir"
+              bcolor="vermelhoTexto"
+              onClick={handleConclude}
+              style={{ width: '100%' }}
+            >
+              Concluir
+            </Button>
+          </S.ConfirmationMessage>
         )}
-      </Sidebar>
-    </CartContainer>
+      </S.Sidebar>
+    </S.CartContainer>
   )
 }
 
